@@ -18,8 +18,8 @@ jobs:
         git clone https://x-access-token:$GITHUB_TOKEN@github.com/ZRUBIX-Sathish/test-nextjs.git
         cd test-nextjs
         # Deploy the project
-        # Note: You MUST add CATALYST_TOKEN as an environment variable in your Catalyst Pipeline settings
-        catalyst deploy --token $CATALYST_TOKEN --force
+        # Note: You MUST add CATALYST_TOKEN and GITHUB_TOKEN as environment variables in your Catalyst Pipeline settings
+        catalyst deploy --token $CATALYST_TOKEN
   trigger-webhook:
     steps:
       - |
