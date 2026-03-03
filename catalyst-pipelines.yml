@@ -9,6 +9,17 @@ jobs:
   hello-world:
     steps:
       - echo "Hello World!"
+  deploy-test-nextjs:
+    steps:
+      - |
+        # Install Catalyst CLI
+        npm install -g zcatalyst-cli
+        # Clone the test-nextjs project using a variable for the token
+        git clone https://x-access-token:$GITHUB_TOKEN@github.com/ZRUBIX-Sathish/test-nextjs.git
+        cd test-nextjs
+        # Deploy the project
+        # Note: You MUST add CATALYST_TOKEN as an environment variable in your Catalyst Pipeline settings
+        catalyst deploy --token $CATALYST_TOKEN --force
   trigger-webhook:
     steps:
       - |
@@ -19,6 +30,9 @@ stages:
       - - hello
         - world
       - hello-world
+  - name: deploy
+    jobs:
+      - deploy-test-nextjs
   - name: notify
     jobs:
       - trigger-webhook
